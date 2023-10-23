@@ -11,7 +11,9 @@ const getScheduleService = async (sourceID, destID, day) => {
   var query1 = `SELECT
     ts."TrainNo",
     ts."TrainName",
+    trainStart."StationName" as "TrainStartStation",
     ts."ArrivalTime",
+    trainEnd."StationName" as "TrainEndStation",
     ts."DepartureTime",
     ts."TrainType",
     ts."DefaultWagonsWithDirection",
@@ -23,9 +25,14 @@ const getScheduleService = async (sourceID, destID, day) => {
     t."DestinationStationID",
     t."ArrivalTimeAtSource",
     t."DepartureTimeAtSource",
-    t."ArrivalTimeAtDestination"
+    t."ArrivalTimeAtDestination",
+    t."DepartureTimeAtDestination"
 FROM
     "TrainSchedule" ts
+JOIN 
+    "Station" trainStart ON trainStart."StationID" = ts."Source"
+JOIN 
+    "Station" trainEnd ON trainEnd."StationID" = ts."Destination"
 JOIN
     "Frequency" f ON ts."Frequency" = f."FrequencyID"
 JOIN
@@ -33,10 +40,12 @@ JOIN
         SELECT
             a."TrainNo",
             a."StationID" AS "SourceStationID",
+
             a."ArrivalTime" AS "ArrivalTimeAtSource",
             a."DepartureTime" AS "DepartureTimeAtSource",
             b."StationID" AS "DestinationStationID",
-            b."ArrivalTime" AS "ArrivalTimeAtDestination"
+            b."ArrivalTime" AS "ArrivalTimeAtDestination",
+            b."DepartureTime" AS "DepartureTimeAtDestination"
         FROM
             "TrainStop" a
         JOIN

@@ -24,6 +24,25 @@ const generateToken = (res, username) => {
 
 };
 
+const generateTokenBooking = (res, username, bookingId) => {
+    const token = jwt.sign(
+        {
+            username,
+        },
+        process.env.JWT_SECRET_BOOKING,
+        {
+            expiresIn: '460s'
+        }
+    );
+    res.cookie('jwt_booking', token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+        maxAge: 8 * 60 * 1000
+    })
+}
+
+
 const generateTokenAdmin = (res, username) => {
     const token = jwt.sign(
         {
@@ -51,4 +70,4 @@ const generateTokenAdmin = (res, username) => {
 
 
 
-export {generateToken, generateTokenAdmin};
+export {generateToken, generateTokenAdmin, generateTokenBooking};

@@ -4,6 +4,8 @@ import {
   getBookingPriceService,
   getBookingDetailsService,
   getSeatsService,
+  bookSeatsService,
+  checkSeatsAvailableService,
 } from "../services/bookingService.js";
 
 const insertBooking = asyncHandler(async (req, res) => {
@@ -56,4 +58,37 @@ const getSeats = asyncHandler(async (req, res) => {
     .json(await getSeatsService(trainNo, date, startStation, endStation));
 });
 
-export { insertBooking, getBookingPrice, getBookingDetails, getSeats };
+
+const bookSeats = asyncHandler( async (req, res) => {
+  const { userID,
+    trainNo,
+    date,
+    isReturn,
+    Source,
+    Destination,
+    Amount,
+    seatList} = req.body;
+
+
+    const SeatAmount = JSON.parse(seatList).length
+
+    const checkSeatsAvailable = await checkSeatsAvailableService(trainNo, date, Source, Destination, JSON.parse(seatList));
+
+    if(checkSeatsAvailable) {
+      res.status(200).json(await bookSeatsService(userID,
+        trainNo,
+        date,
+        isReturn,
+        Source,
+        Destination,
+        Amount,
+        SeatAmount,
+        JSON.parse(seatList)))
+    } else {
+      res.status(400).json("You are booking an already booked seat!")
+    }
+
+  
+})
+
+export { insertBooking, getBookingPrice, getBookingDetails, getSeats, bookSeats };

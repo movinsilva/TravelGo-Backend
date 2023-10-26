@@ -23,4 +23,4 @@ jobs:
       - name: Stop Docker Image
         run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker stop movinsilva/travelgo-backend || true
       - name: Run Docker image file
-        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker run --tag movinsilva/travelgo-backend -d -p 5000:5000 movinsilva/travelgo-backend
+        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker run --name movinsilva/travelgo-backend -d -p 5000:5000 movinsilva/travelgo-backend

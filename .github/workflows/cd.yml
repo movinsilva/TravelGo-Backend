@@ -20,7 +20,5 @@ jobs:
         run: echo "$DOCKER_PASSWORD" | sudo docker login -u $DOCKER_USERNAME --password-stdin
       - name: Pull Docker Image
         run: sudo docker pull movinsilva/travelgo-backend:latest
-      - name: Stop current system
-        run: docker compose down || true
-      - name: Run Docker compose file
-        run: docker run
+      - name: Run Docker image file
+        run: docker run -d -p 5000:5000 movinsilva/travelgo-backend

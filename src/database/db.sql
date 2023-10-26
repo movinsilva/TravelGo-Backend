@@ -19,9 +19,10 @@ CREATE TABLE "Station" (
     "StationName" VARCHAR(255) NOT NULL,
     "BookingStartStation" INTEGER REFERENCES "Station"("StationID"),
     "BookingEndStation" INTEGER REFERENCES "Station"("StationID"),
-    "LineID" INTEGER REFERENCES "Line"("LineID"),
     "Distance" DECIMAL(10, 2)
 );
+
+
 
 CREATE TABLE "Frequency" (
     "FrequencyID" SERIAL PRIMARY KEY,
@@ -133,7 +134,7 @@ CREATE TABLE "AdminUser" (
     "Username" VARCHAR(255),
     "FirstName" VARCHAR(255),
     "LastName" VARCHAR(255),
-    "PasswordHash" VARCHAR(255),
+    "PasswordHash" VARCHAR(255)
 );
 
 
@@ -155,7 +156,7 @@ CREATE TABLE "GenralPrice" (
     "FirstClass" DECIMAL(10, 2),
     "SecondClass" DECIMAL(10, 2),
     "ThirdClass" DECIMAL(10, 2)
-)
+);
 
 CREATE TABLE "BookingPrice" (
     "ID" SERIAL PRIMARY KEY,
@@ -163,8 +164,8 @@ CREATE TABLE "BookingPrice" (
     "DestinationID" INTEGER REFERENCES "Station"("StationID"),
     "FirstClass" DECIMAL(10, 2),
     "SecondClass" DECIMAL(10, 2),
-    "ThirdClass" DECIMAL(10, 2),
-)
+    "ThirdClass" DECIMAL(10, 2)
+);
 
 CREATE TABLE "Line" (
     "LineID" SERIAL PRIMARY KEY,

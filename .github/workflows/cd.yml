@@ -23,4 +23,4 @@ jobs:
       - name: Stop current system
         run: docker compose down || true
       - name: Run Docker compose file
-        run: docker compose up -d
+        run: docker run

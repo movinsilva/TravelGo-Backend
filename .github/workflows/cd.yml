@@ -18,9 +18,14 @@ jobs:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: echo "$DOCKER_PASSWORD" | sudo docker login -u $DOCKER_USERNAME --password-stdin
+      
+      - name: Stop Current Docker Container
+        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker stop travelgo-backend-container || true
+      - name: Remove Current Docker Container
+        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker rm travelgo-backend-container || true
+      - name: Remove Current Docker Image
+        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker rmi movinsilva/travelgo-backend:latest -f || true
       - name: Pull Docker Image
         run: sudo docker pull movinsilva/travelgo-backend:latest
-      - name: Stop Docker Image
-        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker stop travelgo-backend-container || true
       - name: Run Docker image file
         run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker run --name travelgo-backend-container -d -p 5000:5000 movinsilva/travelgo-backend

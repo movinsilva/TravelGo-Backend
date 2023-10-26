@@ -21,4 +21,4 @@ jobs:
       - name: Pull Docker Image
         run: sudo docker pull movinsilva/travelgo-backend:latest
       - name: Run Docker image file
-        run: docker run -d -p 5000:5000 movinsilva/travelgo-backend
+        run: echo "$DOCKER_PASSWORD" | sudo -S sudo docker run -d -p 5000:5000 movinsilva/travelgo-backend

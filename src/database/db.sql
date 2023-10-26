@@ -173,3 +173,6 @@ CREATE TABLE "Line" (
     "StartStationID" INTEGER REFERENCES "Station"("StationID"),
     "EndStationID" INTEGER REFERENCES "Station"("StationID")
 );
+
+ALTER TABLE "Station"
+ADD "LineID" INTEGER REFERENCES "Line"("LineID");

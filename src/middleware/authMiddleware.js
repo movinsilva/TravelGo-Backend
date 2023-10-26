@@ -30,6 +30,24 @@ const protect = asyncHandler(async (req, res, next) => {
      }
 })
 
+const protectBooking = asyncHandler(async (req, res, next) => {
+    let token;
+
+    token = req.cookies.jwt_booking;
+
+    if(token) {
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET_BOOKING);
+            console.log("🚀 ~ file: authMiddleware.js:41 ~ protectBooking ~ decoded:", decoded)
+
+            
+        } catch (error) {
+            res.status(401);
+            throw new Error('Not authorized to continue this process!')
+        }
+    }
+})
+
 
 const protectAdmin = asyncHandler(async (req, res, next) => {
     let token;

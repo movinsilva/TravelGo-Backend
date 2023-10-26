@@ -109,11 +109,20 @@ CREATE TABLE "Passenger" (
 );
 
 CREATE TABLE "Payments" (
-    "PaymentID" INTEGER PRIMARY KEY,
+    "PaymentID" SERIAL PRIMARY KEY,
     "BookingID" INTEGER REFERENCES "Booking"("BookingID"),
     "Timestamp" TIMESTAMP,
     "isSuccess" BOOLEAN DEFAULT false,
     "Response" VARCHAR(255)
+);
+
+CREATE TABLE "CardDetail" (
+    "CardID" SERIAL PRIMARY KEY,
+    "Type" VARCHAR(255),
+    "CardNumber" INTEGER,
+    "CardHolderName" VARCHAR(255),
+    "CardExpiryMonth" INTEGER,
+    "CardExpiryYear" INTEGER 
 );
 
 

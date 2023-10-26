@@ -442,6 +442,14 @@ const createFrequencyService = async (
   return await DbHandler.executeSingleQuery(query);
 };
 
+const getTrainIDService = async (trainNo, date) => {
+  const trainIDQuery = `SELECT "TrainID" 
+    FROM "Train" 
+    WHERE "TrainNo" = ${trainNo} AND "Date" = '${date}'`
+
+    return await DbHandler.executeSingleQuery(trainIDQuery);
+}
+
 export {
   getStationsService,
   getScheduleService,
@@ -457,4 +465,5 @@ export {
   deleteTrainScheduleService,
   createWagonService,
   createFrequencyService,
+  getTrainIDService
 };

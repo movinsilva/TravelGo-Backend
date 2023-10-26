@@ -16,7 +16,11 @@ CREATE TABLE "User" (
 
 CREATE TABLE "Station" (
     "StationID" SERIAL PRIMARY KEY,
-    "StationName" VARCHAR(255) NOT NULL
+    "StationName" VARCHAR(255) NOT NULL,
+    "BookingStartStation" INTEGER REFERENCES "Station"("StationID"),
+    "BookingEndStation" INTEGER REFERENCES "Station"("StationID"),
+    "LineID" INTEGER REFERENCES "Line"("LineID"),
+    "Distance" DECIMAL(10, 2)
 );
 
 CREATE TABLE "Frequency" (
@@ -126,28 +130,16 @@ CREATE TABLE "AdminUser" (
 
 --Pricing tables..
 
--- Update to station table
-ALTER TABLE "Station"
-ADD COLUMN "LineID" INTEGER REFERENCES "TrainLine"("LineID"),
-ADD COLUMN "Distance" DECIMAL(10, 2);
 
 
-CREATE TABLE "TrainLine" (
-    "LineID" SERIAL PRIMARY KEY,
-    "LineName" VARCHAR(255),
-    "StartStationID" INTEGER REFERENCES "Station"("StationID"),
-    "EndStationID" INTEGER REFERENCES "Station"("StationID"),
-    "LineDistance" DECIMAL(10, 2)
-)
-
-CREATE TABLE "RouteConnector" (
-    "ConnectorID" SERIAL PRIMARY KEY,
-    "LineID1" INTEGER REFERENCES "TrainLine"("LineID"),
-    "LineID2" INTEGER REFERENCES "TrainLine"("LineID"),
-    "MiddleRoutes" INTEGER[],
-    "InitialConnectorStationID" INTEGER REFERENCES "Station"("StationID"),
-    "EndConnectorStationID" INTEGER REFERENCES "Station"("StationID")
-)
+-- CREATE TABLE "RouteConnector" (
+--     "ConnectorID" SERIAL PRIMARY KEY,
+--     "LineID1" INTEGER REFERENCES "TrainLine"("LineID"),
+--     "LineID2" INTEGER REFERENCES "TrainLine"("LineID"),
+--     "MiddleRoutes" INTEGER[],
+--     "InitialConnectorStationID" INTEGER REFERENCES "Station"("StationID"),
+--     "EndConnectorStationID" INTEGER REFERENCES "Station"("StationID")
+-- )
 
 CREATE TABLE "GenralPrice" (
     "Distance" INTEGER PRIMARY kEY,
@@ -162,5 +154,12 @@ CREATE TABLE "BookingPrice" (
     "DestinationID" INTEGER REFERENCES "Station"("StationID"),
     "FirstClass" DECIMAL(10, 2),
     "SecondClass" DECIMAL(10, 2),
-    "ThirdClass" DECIMAL(10, 2)
+    "ThirdClass" DECIMAL(10, 2),
 )
+
+CREATE TABLE "Line" (
+    "LineID" SERIAL PRIMARY KEY,
+    "LineName" VARCHAR(255),
+    "StartStationID" INTEGER REFERENCES "Station"("StationID"),
+    "EndStationID" INTEGER REFERENCES "Station"("StationID")
+);

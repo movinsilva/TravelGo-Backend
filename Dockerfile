@@ -23,5 +23,6 @@ ENV POSTGRESQL_PASSWORD=movin123
 ENV POSTGRESQL_PORT=5432
 ENV POSTGRESQL_DATABASE=travelgodb
 ENV JWT_SECRET=nadeeshashehanmovin
+ENV JWT_SECRET_ADMIN=admintravelgo
 
 CMD [ "node", "src/server.js"]

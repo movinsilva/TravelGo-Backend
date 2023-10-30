@@ -7,5 +7,4 @@ router.post("/authAdmin", authAdmin);
 router.post("/registerAdmin", registerAdmin);
 router.post("/logoutAdmin", logoutAdmin)
 
-
 export default router;

@@ -37,7 +37,6 @@ router.post("/admin/create-wagon", createWagon);
 router.post("/admin/create-frequency", createFrequency);
 
 
-
 // Protected routes
 
 // router.route("/admin/schedule").get(protectAdmin, getAllSchedule);

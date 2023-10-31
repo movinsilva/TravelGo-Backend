@@ -292,7 +292,7 @@ VALUES
 
 INSERT INTO "Booking" ("userID", "TrainID", "isReturn", "Source", "Destination", "BookedTime", "Amount", "isPaid")
 VALUES
-  ('15571d9e-10a8-4e2d-b269-e7e4b61eae20', 1, false, 101, 201, '2022-01-15 08:30:00', 500.00, true),
+  ('456c3896-62d8-4ab4-8fbf-87673b77b181', 1, false, 101, 201, '2022-01-15 08:30:00', 500.00, true),
   ('2452a9d7-74ce-4b70-ac52-acadc2e3ca8c', 2, false, 102, 202, '2022-02-20 14:45:00', 750.00, true),
   ('3dc75c2a-e783-4fc6-8f7f-903e1debb088', 3, true, 103, 203, '2022-03-10 10:15:00', 600.00, true),
   ('3de41578-5887-456b-b0b3-f25adf611094', 4, false, 104, 204, '2022-04-05 12:00:00', 450.00, true),
@@ -317,3 +317,73 @@ VALUES
     (213, 40, 900, 700, 500),
     (55, 40, 1600, 1300, 1000);
 
+
+
+-- new queries
+
+INSERT INTO "TrainSchedule" ("TrainNo", "TrainName", "Source", "Destination", "ArrivalTime", "DepartureTime", "TrainType", "Frequency", "DefaultWagonsWithDirection", "InvertedStations", "DefaultTotalSeats")
+VALUES
+    (3000, 'Galu Kumari', 209, 78, '08:45:00', '11:45:00', 'Express', 1, '{{1, 0}, {2, 0}}', '{}', 100);
+
+INSERT INTO "Train" ("TrainNo", "Date")
+VALUES
+    (3000, '2023-11-01'),
+    (3000, '2023-11-02'),
+    (3000, '2023-11-03'),
+    (3000, '2023-11-06'),
+    (3000, '2023-11-07'),
+    (3000, '2023-11-08'),
+    (3000, '2023-11-09'),
+    (3000, '2023-11-10'),
+    (3000, '2023-11-13');
+
+INSERT INTO "TrainStop" ("TrainNo", "StationID", "ArrivalTime", "DepartureTime", "Load", "PlatformNo")
+VALUES
+    (3000, 55, '08:50:00', '08:55:00', 9, 1),
+    (3000, 236, '09:30:00', '09:32:00', 8, 2),
+    (3000, 267, '09:40:00', '09:42:00', 8, 3),
+    (3000, 373, '09:55:00', '09:56:00', 9, 3),
+    (3000, 135, '10:15:00', '10:17:00', 7, 2),
+    (3000, 136, '10:20:00', '10:24:00', 6, 2),
+    (3000, 10, '10:55:00', '10:57:00', 5, 2),
+    (3000, 11, '11:30:00', '11:33:00', 3, 1);
+
+INSERT INTO "Line" ("LineName", "StartStationID", "EndStationID")
+VALUES ('Coastal line', 209, 40);
+
+
+UPDATE "Station"
+SET "BookingStartStation" = 55,
+    "BookingEndStation" = 10,
+    "Distance" = 1.90,
+    "LineID" = 1
+WHERE "StationID" = 55;
+
+UPDATE "Station"
+SET "BookingStartStation" = 55,
+    "BookingEndStation" = 10,
+    "Distance" = 28.15,
+    "LineID" = 1
+WHERE "StationID" = 267;
+
+UPDATE "Station"
+SET "BookingStartStation" = 55,
+    "BookingEndStation" = 10,
+    "Distance" = 34.37,
+    "LineID" = 1
+WHERE "StationID" = 373;
+
+
+UPDATE "Station"
+SET "BookingStartStation" = 55,
+    "BookingEndStation" = 10,
+    "Distance" = 41.77,
+    "LineID" = 1
+WHERE "StationID" = 135;
+
+UPDATE "Station"
+SET "BookingStartStation" = 55,
+    "BookingEndStation" = 10,
+    "Distance" = 43.76,
+    "LineID" = 1
+WHERE "StationID" = 136;

@@ -5,12 +5,23 @@ const router = express.Router();
 
 router.post("/create-booking", insertBooking);
 
-router.route("/admin/bookingprice").get(protectAdmin, getBookingPrice);
+router.get("/admin/bookingprice", getBookingPrice);
 
-router.route("/book-tickets").post(protect, getBookingDetails)
+router.post("/book-tickets", getBookingDetails)
 
-router.route("/get-seats").post(protect, getSeats)
+router.post("/get-seats", getSeats)
 
-router.route("/book-seats").post(protect, bookSeats);
+router.post("/book-seats", bookSeats);
+
+
+// protected routes
+
+// router.route("/admin/bookingprice").get(protectAdmin, getBookingPrice);
+
+// router.route("/book-tickets").post(protect, getBookingDetails)
+
+// router.route("/get-seats").post(protect, getSeats)
+
+// router.route("/book-seats").post(protect, bookSeats);
 
 export default router;

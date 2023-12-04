@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+info:
+  title: TravelGo APIs
+  version: 2.0.0
+paths:
+  /api/users/auth:
+       post:
+           summary: Authentication.
+           requestBody:
+               required: true
+               content:
+                   application/json:
+                       schema:
+                           type: object
+                           properties:
+                               email:
+                                   type: string
+                                   description: Username
+                                   example: john@gmail.com
+                               password:
+                                   type: string
+                                   description: Relevant password for the account
+                                   example: john123
+           responses:
+               201:
+                   description: User is authenticated.
+                   content:
+                       application/json:
+                           schema:
+                               type: object
+                               properties:
+                                   email:
+                                       type: string
+                                       description: Username
+                                       example: john@gmail.com
+                                   password:
+                                       type: string
+                                       description: Relevant password for the account
+                                       example: john123
+               400:
+                   description: Invalid Credentials.
+  /:
+    get:
+      summary: Server status
+      responses:
+        '200':
+          description: |-
+            200 response
